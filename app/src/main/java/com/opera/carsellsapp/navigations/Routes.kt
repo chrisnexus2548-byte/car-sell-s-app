@@ -1,0 +1,18 @@
+package com.opera.carsellsapp.navigations
+
+const val ROUTE_SPLASH = "splash"
+const val ROUTE_ONBOARDING = "onboarding"
+const val ROUTE_LOGIN = "login"
+const val ROUTE_REGISTER = "register"
+const val ROUTE_DASHBOARD = "dashboard"
+const val ROUTE_PRODUCTLIST = "product_list"
+const val ROUTE_ADDPRODUCT = "add_product"
+const val ROUTE_UPDATEPRODUCT = "update_product"
+const val ROUTE_CART = "cart"
+const val ROUTE_PROFILE = "profile"
+const val ROUTE_SETTINGS = "settings"
+const val ROUTE_MYINTENTS = "my_intents"
+const val ROUTE_USERDASHBOARD = "user_dashboard"
+const val ROUTE_BOX = "box_screen"
+const val ROUTE_FIRST = "first_screen"
+const val ROUTE_ROW = "row_screen"

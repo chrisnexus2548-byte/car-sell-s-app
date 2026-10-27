@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "303977432164",
+    "project_id": "car-sell-s-app",
+    "storage_bucket": "car-sell-s-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:303977432164:android:3d5a8c4641102b478b8b71",
+        "android_client_info": {
+          "package_name": "com.opera.carsellsapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjOQUvXGPUnyKPfteHGntu0nknUtMgOas"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
