@@ -22,6 +22,7 @@ import com.opera.carsellsapp.screens.profile.ProfileScreen
 import com.opera.carsellsapp.screens.register.RegisterScreen
 import com.opera.carsellsapp.screens.settings.SettingsScreen
 import com.opera.carsellsapp.screens.splashscreen.SplashScreen
+import com.opera.carsellsapp.user.UserDashboardScreen
 
 @Composable
 fun AppNavHost(
@@ -46,6 +47,9 @@ fun AppNavHost(
         }
         composable(ROUTE_DASHBOARD) {
             DashboardScreen(navController = navController)
+        }
+        composable(ROUTE_USERDASHBOARD) {
+            UserDashboardScreen(navController = navController)
         }
         composable(ROUTE_PRODUCTLIST) {
             ProductListScreen(navController = navController)

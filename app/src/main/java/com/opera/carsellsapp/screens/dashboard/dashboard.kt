@@ -18,9 +18,9 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.DirectionsCar
-import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.PhoneInTalk
 import androidx.compose.material.icons.filled.Settings
@@ -53,12 +53,16 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalInspectionMode
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.opera.carsellsapp.R
 import com.opera.carsellsapp.navigations.ROUTE_ADDPRODUCT
 import com.opera.carsellsapp.navigations.ROUTE_BOX
 import com.opera.carsellsapp.navigations.ROUTE_CART
@@ -67,20 +71,25 @@ import com.opera.carsellsapp.navigations.ROUTE_MYINTENTS
 import com.opera.carsellsapp.navigations.ROUTE_PRODUCTLIST
 import com.opera.carsellsapp.navigations.ROUTE_ROW
 import com.opera.carsellsapp.navigations.ROUTE_SETTINGS
+import com.opera.carsellsapp.navigations.ROUTE_USERDASHBOARD
 import com.opera.carsellsapp.viewModel.AuthViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DashboardScreen(navController: NavHostController = rememberNavController()) {
     val context = LocalContext.current
+    val isPreview = LocalInspectionMode.current
     val authViewModel = remember { AuthViewModel(navController, context) }
     var username by remember { mutableStateOf("Car Enthusiast") }
 
     LaunchedEffect(Unit) {
-        authViewModel.getCurrentUserName { name -> username = name }
+        if (!isPreview) {
+            authViewModel.getCurrentUserName { name -> username = name }
+        }
     }
 
     Scaffold(
+        containerColor = colorResource(id = R.color.chis),
         topBar = {
             TopAppBar(
                 title = {
@@ -88,15 +97,15 @@ fun DashboardScreen(navController: NavHostController = rememberNavController()) 
                         Icon(
                             imageVector = Icons.Default.DirectionsCar,
                             contentDescription = null,
-                            tint = Color.White,
+                            tint = Color.Green,
                             modifier = Modifier.size(28.dp)
                         )
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text("CarSell Dashboard", fontWeight = FontWeight.Bold)
+                        Text("CarSell ", fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFF0F172A),
+                    containerColor = Color.Black,
                     titleContentColor = Color.White
                 ),
                 actions = {
@@ -109,16 +118,16 @@ fun DashboardScreen(navController: NavHostController = rememberNavController()) 
                     }
                     IconButton(onClick = { authViewModel.signout() }) {
                         Icon(
-                            imageVector = Icons.Default.ExitToApp,
+                            imageVector = Icons.AutoMirrored.Filled.ExitToApp,
                             contentDescription = "Sign Out",
-                            tint = Color(0xFFEF4444)
+                            tint = Color.White
                         )
                     }
                 }
             )
         },
         bottomBar = {
-            NavigationBar(containerColor = Color(0xFF1E293B)) {
+            NavigationBar(containerColor = Color.Black) {
                 NavigationBarItem(
                     selected = true,
                     onClick = { },
@@ -127,7 +136,7 @@ fun DashboardScreen(navController: NavHostController = rememberNavController()) 
                     colors = NavigationBarItemDefaults.colors(
                         selectedIconColor = Color.White,
                         selectedTextColor = Color.White,
-                        indicatorColor = Color(0xFF2563EB)
+                        indicatorColor = Color.Black
                     )
                 )
                 NavigationBarItem(
@@ -136,7 +145,7 @@ fun DashboardScreen(navController: NavHostController = rememberNavController()) 
                     icon = { Icon(Icons.Default.DirectionsCar, contentDescription = "Cars") },
                     label = { Text("Listings") },
                     colors = NavigationBarItemDefaults.colors(
-                        unselectedIconColor = Color(0xFF94A3B8),
+                        unselectedIconColor = Color.White,
                         unselectedTextColor = Color(0xFF94A3B8)
                     )
                 )
@@ -146,7 +155,7 @@ fun DashboardScreen(navController: NavHostController = rememberNavController()) 
                     icon = { Icon(Icons.Default.PhoneInTalk, contentDescription = "Intents") },
                     label = { Text("Intents") },
                     colors = NavigationBarItemDefaults.colors(
-                        unselectedIconColor = Color(0xFF94A3B8),
+                        unselectedIconColor = Color.White,
                         unselectedTextColor = Color(0xFF94A3B8)
                     )
                 )
@@ -156,7 +165,7 @@ fun DashboardScreen(navController: NavHostController = rememberNavController()) 
                     icon = { Icon(Icons.Default.Settings, contentDescription = "Settings") },
                     label = { Text("Settings") },
                     colors = NavigationBarItemDefaults.colors(
-                        unselectedIconColor = Color(0xFF94A3B8),
+                        unselectedIconColor = Color.White,
                         unselectedTextColor = Color(0xFF94A3B8)
                     )
                 )
@@ -175,7 +184,7 @@ fun DashboardScreen(navController: NavHostController = rememberNavController()) 
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color(0xFF0F172A))
+                .background(colorResource(id = R.color.chis))
                 .padding(innerPadding)
                 .verticalScroll(rememberScrollState())
                 .padding(16.dp)
@@ -184,7 +193,7 @@ fun DashboardScreen(navController: NavHostController = rememberNavController()) 
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(20.dp),
-                colors = CardDefaults.cardColors(containerColor = Color(0xFF1E293B)),
+                colors = CardDefaults.cardColors(containerColor = Color.Blue),
                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
             ) {
                 Row(
@@ -197,7 +206,7 @@ fun DashboardScreen(navController: NavHostController = rememberNavController()) 
                         modifier = Modifier
                             .size(54.dp)
                             .clip(CircleShape)
-                            .background(Color(0xFF2563EB)),
+                            .background(Color.Magenta),
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
@@ -231,9 +240,9 @@ fun DashboardScreen(navController: NavHostController = rememberNavController()) 
 
             Text(
                 text = "CarSell Control Center",
-                fontSize = 18.sp,
+                fontSize = 23.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color.White
+                color = Color.Black
             )
 
             Spacer(modifier = Modifier.height(14.dp))
@@ -291,6 +300,18 @@ fun DashboardScreen(navController: NavHostController = rememberNavController()) 
                 }
             }
 
+            Spacer(modifier = Modifier.height(12.dp))
+
+            DashboardActionCard(
+                title = "Modern User Dashboard",
+                subtitle = "Switch to personalized user workspace & metrics",
+                icon = Icons.Default.DirectionsCar,
+                accentColor = Color(0xFF3B82F6),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                navController.navigate(ROUTE_USERDASHBOARD)
+            }
+
             Spacer(modifier = Modifier.height(24.dp))
 
             Text(
@@ -310,7 +331,7 @@ fun DashboardScreen(navController: NavHostController = rememberNavController()) 
                     title = "Spotlight Box",
                     subtitle = "BoxScreen layout",
                     icon = Icons.Default.ViewModule,
-                    accentColor = Color(0xFF8B5CF6),
+                    accentColor = Color.Blue,
                     modifier = Modifier.weight(1f)
                 ) {
                     navController.navigate(ROUTE_BOX)
@@ -320,7 +341,7 @@ fun DashboardScreen(navController: NavHostController = rememberNavController()) 
                     title = "Welcome Screen",
                     subtitle = "FirstScreen overview",
                     icon = Icons.Default.Web,
-                    accentColor = Color(0xFF06B6D4),
+                    accentColor = Color.Blue,
                     modifier = Modifier.weight(1f)
                 ) {
                     navController.navigate(ROUTE_FIRST)
@@ -354,7 +375,7 @@ fun DashboardActionCard(
     Card(
         modifier = modifier.clickable { onClick() },
         shape = RoundedCornerShape(18.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF1E293B)),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF130A02)),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Column(

@@ -3,6 +3,7 @@ package com.opera.carsellsapp.screens.products
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -32,9 +33,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.colorResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
+import com.opera.carsellsapp.R
 import com.opera.carsellsapp.models.Product
 import com.opera.carsellsapp.viewModel.ProductViewModel
 
@@ -42,12 +45,13 @@ import com.opera.carsellsapp.viewModel.ProductViewModel
 @Composable
 fun UpdateProductScreen(navController: NavHostController, productId: String){
     Scaffold(
+        containerColor = colorResource(id = R.color.chis),
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text("Update Product") },
+                title = { Text("Update Car Detail") },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color.Green,
-                    titleContentColor = Color.Blue
+                    containerColor = Color.Black,
+                    titleContentColor = Color.White
                 )
             )
         }
@@ -55,6 +59,7 @@ fun UpdateProductScreen(navController: NavHostController, productId: String){
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .background(colorResource(id = R.color.chis))
                 .padding(innerpadding)
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -72,8 +77,8 @@ fun UpdateProductScreen(navController: NavHostController, productId: String){
             val context = LocalContext.current
             val myproductviewmodel = ProductViewModel(navController, context)
             LaunchedEffect(productId) {
-                myproductviewmodel.databasereference.child(productId).get()
-                    .addOnSuccessListener { snapshot ->
+                myproductviewmodel.databasereference?.child(productId)?.get()
+                    ?.addOnSuccessListener { snapshot ->
                         val product = snapshot.getValue(Product::class.java)
                         product?.let {
                             productName = it.name
@@ -86,14 +91,14 @@ fun UpdateProductScreen(navController: NavHostController, productId: String){
             OutlinedTextField(
                 value = productName,
                 onValueChange = { productName = it },
-                label = { Text("Product Name") },
+                label = { Text("Car Name") },
                 modifier = Modifier.fillMaxWidth()
             )
             Spacer(modifier = Modifier.height(20.dp))
             OutlinedTextField(
                 value = price,
                 onValueChange = { price = it },
-                label = { Text("Product Price") },
+                label = { Text("Car Price") },
                 modifier = Modifier.fillMaxWidth(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
             )
@@ -101,7 +106,7 @@ fun UpdateProductScreen(navController: NavHostController, productId: String){
             OutlinedTextField(
                 value = description,
                 onValueChange = { description = it },
-                label = { Text("Product Description") },
+                label = { Text("Car Description") },
                 modifier = Modifier.fillMaxWidth()
             )
             Spacer(modifier = Modifier.height(20.dp))
@@ -136,11 +141,11 @@ fun UpdateProductScreen(navController: NavHostController, productId: String){
                 },
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.Green,
-                    contentColor = Color.Blue
+                    containerColor = Color.Red,
+                    contentColor = Color.Black
                 )
             ) {
-                Text("UPDATE PRODUCT")
+                Text("UPDATE CAR")
             }
         }
     }

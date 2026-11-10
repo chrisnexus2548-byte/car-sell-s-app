@@ -26,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -34,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.opera.carsellsapp.R
 import com.opera.carsellsapp.models.onboardingItems
 import com.opera.carsellsapp.navigations.ROUTE_LOGIN
 import com.opera.carsellsapp.navigations.ROUTE_ONBOARDING
@@ -45,130 +47,141 @@ fun OnboardingScreen(navController: NavHostController){
         pageCount = { onboardingItems.size }
     )
     val scope = rememberCoroutineScope()
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color = Color.White),
-        horizontalAlignment = Alignment.CenterHorizontally
+
+    Box(
+        modifier = Modifier.fillMaxSize()
     ) {
-        // show skip if not in the last page
-        if (pagerState.currentPage != onboardingItems.lastIndex){
+        // Background Image
+        Image(
+            painter = painterResource(id = R.drawable.back),
+            contentDescription = "Background Image",
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop
+        )
+
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            // show skip if not in the last page
+            if (pagerState.currentPage != onboardingItems.lastIndex){
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    TextButton(
+                        onClick = {
+                            navController.navigate(ROUTE_LOGIN){
+                                popUpTo(ROUTE_ONBOARDING){
+                                    inclusive = true
+                                }
+                            }
+                        },
+                        modifier = Modifier
+                            .height(40.dp)
+                            .width(84.dp)
+                    ) {
+                        Text("skip", fontSize = 18.sp, color = Color.Magenta, fontWeight = FontWeight.Bold)
+                    }
+                }
+            } else {
+                Spacer(modifier = Modifier.height(40.dp))
+            }
+
+            // horizontal pages
+            HorizontalPager(
+                state = pagerState,
+                modifier = Modifier.weight(1f)
+            ) { page ->
+                val item = onboardingItems[page]
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    // image
+                    Image(
+                        painter = painterResource(id = R.drawable.ad),
+                        contentDescription = item.title,
+                        modifier = Modifier
+                            .size(200.dp)
+                            .clip(CircleShape)
+                    )
+                    Spacer(modifier = Modifier.height(15.dp))
+                    // title
+                    Text(
+                        text = item.title,
+                        fontSize = 26.sp,
+                        color = Color.Blue,
+                        fontWeight = FontWeight.Bold,
+                    )
+                    Spacer(modifier = Modifier.height(15.dp))
+                    // description
+                    Text(
+                        text = item.description,
+                        fontSize = 18.sp,
+                        color = Color.DarkGray,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center
+                    )
+                }
+            }
+
+            // page indicators
             Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                repeat(onboardingItems.size) { index ->
+                    val isSelected = pagerState.currentPage == index
+                    Box(
+                        modifier = Modifier
+                            .padding(horizontal = 4.dp)
+                            .size(
+                                if (isSelected) 12.dp else 8.dp
+                            )
+                            .clip(CircleShape)
+                            .background(
+                                if (isSelected) Color.Green else Color.LightGray
+                            )
+                    )
+                }
+            }
+            Spacer(modifier = Modifier.height(20.dp))
+
+            // Next / Get Started button
+            Button(
+                onClick = {
+                    if (pagerState.currentPage < onboardingItems.size - 1) {
+                        scope.launch {
+                            pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                        }
+                    } else {
+                        navController.navigate(ROUTE_LOGIN)
+                    }
+                },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
-                horizontalArrangement = Arrangement.End
+                    .padding(horizontal = 32.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Red,
+                    contentColor = Color.Black
+                )
             ) {
-                TextButton(
-                    onClick = {
-                        navController.navigate(ROUTE_LOGIN){
-                            popUpTo(ROUTE_ONBOARDING){
-                                inclusive = true
-                            }
-                        }
-                    },
-                    modifier = Modifier
-                        .height(55.dp)
-                        .width(100.dp)
-                ) {
-                    Text("skip", fontSize = 18.sp, color = Color(0xFF2E7D32), fontWeight = FontWeight.Bold)
-                }
-            }
-        } else {
-            Spacer(modifier = Modifier.height(40.dp))
-        }
-
-        // horizontal pages
-        HorizontalPager(
-            state = pagerState,
-            modifier = Modifier.weight(1f)
-        ) { page ->
-            val item = onboardingItems[page]
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                // image
-                Image(
-                    painter = painterResource(id = item.imageRes),
-                    contentDescription = item.title,
-                    modifier = Modifier
-                        .size(200.dp)
-                        .clip(CircleShape)
-                )
-                Spacer(modifier = Modifier.height(15.dp))
-                // title
                 Text(
-                    text = item.title,
-                    fontSize = 26.sp,
-                    color = Color.Blue,
-                    fontWeight = FontWeight.Bold,
-                )
-                Spacer(modifier = Modifier.height(15.dp))
-                // description
-                Text(
-                    text = item.description,
-                    fontSize = 18.sp,
-                    color = Color.DarkGray,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center
-                )
-            }
-        }
-
-        // page indicators
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center
-        ) {
-            repeat(onboardingItems.size) { index ->
-                val isSelected = pagerState.currentPage == index
-                Box(
-                    modifier = Modifier
-                        .padding(horizontal = 4.dp)
-                        .size(
-                            if (isSelected) 12.dp else 8.dp
-                        )
-                        .clip(CircleShape)
-                        .background(
-                            if (isSelected) Color.Green else Color.LightGray
-                        )
-                )
-            }
-        }
-        Spacer(modifier = Modifier.height(20.dp))
-
-        // Next / Get Started button
-        Button(
-            onClick = {
-                if (pagerState.currentPage < onboardingItems.size - 1) {
-                    scope.launch {
-                        pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                    text = if (pagerState.currentPage == onboardingItems.size - 1) {
+                        "Get Started"
+                    } else {
+                        "Next"
                     }
-                } else {
-                    navController.navigate(ROUTE_LOGIN)
-                }
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 32.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color.Green,
-                contentColor = Color.Blue
-            )
-        ) {
-            Text(
-                text = if (pagerState.currentPage == onboardingItems.size - 1) {
-                    "Get Started"
-                } else {
-                    "Next"
-                }
-            )
+                )
+            }
+            Spacer(modifier = Modifier.height(60.dp))
         }
-        Spacer(modifier = Modifier.height(60.dp))
     }
 }
 

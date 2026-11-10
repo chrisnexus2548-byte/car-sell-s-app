@@ -34,6 +34,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -44,9 +45,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -74,11 +75,7 @@ fun LoginScreen(navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(
-                Brush.verticalGradient(
-                    colors = listOf(Color(0xFF1E293B), Color(0xFF0F172A))
-                )
-            )
+            .background(colorResource(id = R.color.chis))
             .verticalScroll(rememberScrollState())
             .padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -87,9 +84,9 @@ fun LoginScreen(navController: NavHostController) {
         // App Logo & Header
         Box(
             modifier = Modifier
-                .size(90.dp)
+                .size(54.dp)
                 .clip(CircleShape)
-                .background(Color(0xFF2563EB)),
+                .background(Color.Black),
             contentAlignment = Alignment.Center
         ) {
             Icon(
@@ -103,16 +100,17 @@ fun LoginScreen(navController: NavHostController) {
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "CAR SELL",
-            fontSize = 36.sp,
+            text = "See what's happening",
+            fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
-            color = Color.White
+            color = Color.Red
         )
 
         Text(
             text = "Buy & Sell Cars Fast and Transparently",
             fontSize = 14.sp,
-            color = Color(0xFF94A3B8)
+            fontWeight = FontWeight.Bold,
+            color = Color.Black
         )
 
         Spacer(modifier = Modifier.height(28.dp))
@@ -120,20 +118,21 @@ fun LoginScreen(navController: NavHostController) {
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(20.dp),
-            colors = CardDefaults.cardColors(containerColor = Color(0xFF1E293B)),
+            colors = CardDefaults.cardColors(containerColor = Color.Transparent),
             elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(20.dp),
+                    .padding(36.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
                     text = "Welcome Back",
                     fontSize = 22.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.White
+                    color = Color.Green,
+
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -148,7 +147,7 @@ fun LoginScreen(navController: NavHostController) {
                         onClick = { selectedRole = "Buyer" },
                         label = { Text("Car Buyer") },
                         colors = FilterChipDefaults.filterChipColors(
-                            selectedContainerColor = Color(0xFF2563EB),
+                            selectedContainerColor = Color.Black,
                             selectedLabelColor = Color.White
                         )
                     )
@@ -158,7 +157,7 @@ fun LoginScreen(navController: NavHostController) {
                         onClick = { selectedRole = "Seller" },
                         label = { Text("Car Seller") },
                         colors = FilterChipDefaults.filterChipColors(
-                            selectedContainerColor = Color(0xFF2563EB),
+                            selectedContainerColor = Color.Black,
                             selectedLabelColor = Color.White
                         )
                     )
@@ -181,6 +180,15 @@ fun LoginScreen(navController: NavHostController) {
                         )
                     },
                     shape = RoundedCornerShape(12.dp),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedTextColor = Color.Black,
+                        unfocusedTextColor = Color.Black,
+                        focusedLabelColor = Color(0xFF1E293B),
+                        unfocusedLabelColor = Color(0xFF64748B),
+                        cursorColor = Color.Black,
+                        focusedBorderColor = Color.Black,
+                        unfocusedBorderColor = Color(0xFF94A3B8)
+                    ),
                     modifier = Modifier.fillMaxWidth()
                 )
 
@@ -211,6 +219,15 @@ fun LoginScreen(navController: NavHostController) {
                         }
                     },
                     shape = RoundedCornerShape(12.dp),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedTextColor = Color.Black,
+                        unfocusedTextColor = Color.Black,
+                        focusedLabelColor = Color(0xFF1E293B),
+                        unfocusedLabelColor = Color(0xFF64748B),
+                        cursorColor = Color.Black,
+                        focusedBorderColor = Color.Black,
+                        unfocusedBorderColor = Color(0xFF94A3B8)
+                    ),
                     modifier = Modifier.fillMaxWidth()
                 )
 
@@ -222,7 +239,7 @@ fun LoginScreen(navController: NavHostController) {
                         authViewModel.login(email, password)
                     },
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF2563EB),
+                        containerColor = Color.Magenta,
                         contentColor = Color.White
                     ),
                     shape = RoundedCornerShape(12.dp),
@@ -242,7 +259,7 @@ fun LoginScreen(navController: NavHostController) {
                 TextButton(onClick = { navController.navigate(ROUTE_REGISTER) }) {
                     Text(
                         text = "Don't have an account? Register here",
-                        color = Color(0xFF60A5FA),
+                        color = Color.Blue,
                         fontSize = 14.sp
                     )
                 }

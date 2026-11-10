@@ -40,6 +40,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
+import com.opera.carsellsapp.R
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -66,6 +68,7 @@ fun ProfileScreen(navController: NavHostController) {
     }
 
     Scaffold(
+        containerColor = colorResource(id = R.color.chis),
         topBar = {
             TopAppBar(
                 title = { Text("Profile") },
@@ -75,7 +78,7 @@ fun ProfileScreen(navController: NavHostController) {
                     }
                 },
                 colors = topAppBarColors(
-                    containerColor = Color(0xFF2563EB),
+                    containerColor = Color.Black,
                     titleContentColor = Color.White
                 )
             )

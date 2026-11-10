@@ -35,9 +35,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.colorResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
+import com.opera.carsellsapp.R
 import com.opera.carsellsapp.models.Product
 import com.opera.carsellsapp.navigations.ROUTE_ADDPRODUCT
 import com.opera.carsellsapp.navigations.ROUTE_UPDATEPRODUCT
@@ -47,30 +49,31 @@ import com.opera.carsellsapp.viewModel.ProductViewModel
 @Composable
 fun ProductListScreen(navController: NavHostController){
     Scaffold(
+        containerColor = colorResource(id = R.color.chis),
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        "PRODUCT LIST",
+                        "CAR LIST",
                         fontWeight = FontWeight.Bold,
                         fontSize = 28.sp
                     )
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color.Green,
-                    titleContentColor = Color.Blue
+                    containerColor = Color.Black,
+                    titleContentColor = Color.White
                 )
             )
         },
         floatingActionButton = {
             FloatingActionButton(
                 onClick = { navController.navigate(ROUTE_ADDPRODUCT) },
-                containerColor = Color.Green
+                containerColor = Color.Black
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
                     contentDescription = "add icon",
-                    tint = Color.Red
+                    tint = Color.White
                 )
             }
         }
@@ -144,7 +147,7 @@ fun ProductListScreen(navController: NavHostController){
                                 navController.navigate("$ROUTE_UPDATEPRODUCT/${item.id}")
                             },
                             colors = ButtonDefaults.buttonColors(
-                                containerColor = Color.Green
+                                containerColor = Color.Black
                             ),
                             modifier = Modifier.weight(1f)
                         ) {

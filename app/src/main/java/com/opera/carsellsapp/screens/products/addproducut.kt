@@ -3,6 +3,7 @@ package com.opera.carsellsapp.screens.products
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -33,6 +34,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
@@ -48,11 +50,13 @@ import com.opera.carsellsapp.viewModel.ProductViewModel
 @Composable
 fun AddProductScreen(navController: NavHostController){
     Scaffold(
+        containerColor = colorResource(id = R.color.chis),
         topBar = {
             TopAppBar(
-                title = { Text("ADD PRODUCT") },
+                title = { Text("ADD A CAR") },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color.Green
+                    containerColor = Color.Black,
+                    titleContentColor = Color.White
                 )
             )
         }
@@ -60,12 +64,13 @@ fun AddProductScreen(navController: NavHostController){
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .background(colorResource(id = R.color.chis))
                 .padding(innerpadding)
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                "ADD A NEW PRODUCT",
+                "ADD A CAR ",
                 fontSize = 28.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.Blue
@@ -83,14 +88,14 @@ fun AddProductScreen(navController: NavHostController){
             OutlinedTextField(
                 value = productName,
                 onValueChange = { productName = it },
-                label = { Text("Enter product name") },
+                label = { Text("Enter car name") },
                 modifier = Modifier.fillMaxWidth()
             )
             Spacer(modifier = Modifier.height(20.dp))
             OutlinedTextField(
                 value = description,
                 onValueChange = { description = it },
-                label = { Text("Enter product description") },
+                label = { Text("Car Description") },
                 modifier = Modifier.fillMaxWidth()
             )
             Spacer(modifier = Modifier.height(20.dp))

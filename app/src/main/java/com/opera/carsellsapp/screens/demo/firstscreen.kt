@@ -17,6 +17,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.DirectionsCar
@@ -34,10 +36,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -55,7 +57,7 @@ fun FirstScreen(navController: NavHostController = rememberNavController()) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF0F172A))
+            .background(colorResource(id = R.color.chis))
             .verticalScroll(rememberScrollState())
             .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -68,11 +70,7 @@ fun FirstScreen(navController: NavHostController = rememberNavController()) {
                 .fillMaxWidth()
                 .height(200.dp)
                 .clip(RoundedCornerShape(24.dp))
-                .background(
-                    Brush.horizontalGradient(
-                        colors = listOf(Color(0xFF2563EB), Color(0xFF1D4ED8))
-                    )
-                ),
+                .background(Color(0xFF130A02)),
             contentAlignment = Alignment.Center
         ) {
             Column(
@@ -97,13 +95,13 @@ fun FirstScreen(navController: NavHostController = rememberNavController()) {
 
                 Text(
                     text = "Welcome to CarSell",
-                    fontSize = 28.sp,
+                    fontSize = 30.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.White
                 )
 
                 Text(
-                    text = "The #1 Marketplace for Buying & Selling Vehicles",
+                    text = "The Marketplace for Buying & Selling Vehicles",
                     fontSize = 14.sp,
                     color = Color.White.copy(alpha = 0.8f)
                 )
@@ -117,7 +115,7 @@ fun FirstScreen(navController: NavHostController = rememberNavController()) {
             text = "Why Choose CarSell?",
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
-            color = Color.White,
+            color = Color(0xFF0B0D1E),
             modifier = Modifier.align(Alignment.Start)
         )
 
@@ -210,7 +208,7 @@ fun FeatureHighlightCard(
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF1E293B)),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF011309)),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Row(

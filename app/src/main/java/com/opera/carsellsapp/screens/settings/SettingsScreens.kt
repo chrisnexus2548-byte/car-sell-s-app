@@ -48,6 +48,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
+import com.opera.carsellsapp.R
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -68,6 +70,7 @@ fun SettingsScreen(navController: NavHostController) {
     var darkModeEnabled by remember { mutableStateOf(false) }
 
     Scaffold(
+        containerColor = colorResource(id = R.color.chis),
         topBar = {
             TopAppBar(
                 title = { Text("Settings") },
@@ -80,7 +83,7 @@ fun SettingsScreen(navController: NavHostController) {
                     }
                 },
                 colors = topAppBarColors(
-                    containerColor = Color(0xFF4CAF50),
+                    containerColor = Color.Black,
                     titleContentColor = Color.White,
                     navigationIconContentColor = Color.White
                 )
@@ -91,7 +94,7 @@ fun SettingsScreen(navController: NavHostController) {
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
-                .background(Color(0xFFF8F9FA))
+                .background(colorResource(id = R.color.chis))
                 .verticalScroll(rememberScrollState())
                 .padding(horizontal = 16.dp, vertical = 12.dp)
         ) {

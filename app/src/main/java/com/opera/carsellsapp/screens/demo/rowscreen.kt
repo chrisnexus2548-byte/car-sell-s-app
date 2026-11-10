@@ -37,10 +37,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.opera.carsellsapp.R
 import com.opera.carsellsapp.navigations.ROUTE_PRODUCTLIST
 
 @Composable
@@ -48,7 +50,7 @@ fun RowScreen(navController: NavHostController = rememberNavController()) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF0F172A))
+            .background(colorResource(id = R.color.chis))
             .verticalScroll(rememberScrollState())
             .padding(16.dp)
     ) {

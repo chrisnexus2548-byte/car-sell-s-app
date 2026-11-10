@@ -2,6 +2,8 @@ package com.opera.carsellsapp.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+val Chis = Color(0xFFBF6E27)
+
 val Purple80 = Color(0xFFD0BCFF)
 val PurpleGrey80 = Color(0xFFCCC2DC)
 val Pink80 = Color(0xFFEFB8C8)

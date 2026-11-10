@@ -33,6 +33,7 @@ import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -43,7 +44,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -53,8 +53,10 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.colorResource
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.opera.carsellsapp.R
 import com.opera.carsellsapp.navigations.ROUTE_LOGIN
 import com.opera.carsellsapp.viewModel.AuthViewModel
 
@@ -73,11 +75,7 @@ fun RegisterScreen(navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(
-                Brush.verticalGradient(
-                    colors = listOf(Color(0xFF1E293B), Color(0xFF0F172A))
-                )
-            )
+            .background(colorResource(id = R.color.chis))
             .verticalScroll(rememberScrollState())
             .padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -85,9 +83,9 @@ fun RegisterScreen(navController: NavHostController) {
     ) {
         Box(
             modifier = Modifier
-                .size(80.dp)
+                .size(54.dp)
                 .clip(CircleShape)
-                .background(Color(0xFF2563EB)),
+                .background(Color.Black),
             contentAlignment = Alignment.Center
         ) {
             Icon(
@@ -104,13 +102,14 @@ fun RegisterScreen(navController: NavHostController) {
             text = "CREATE ACCOUNT",
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
-            color = Color.White
+            color = Color.Red
         )
 
         Text(
             text = "Join CarSell to browse or post car listings",
             fontSize = 14.sp,
-            color = Color(0xFF94A3B8)
+            fontWeight = FontWeight.Bold,
+            color = Color.Black
         )
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -118,20 +117,21 @@ fun RegisterScreen(navController: NavHostController) {
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(20.dp),
-            colors = CardDefaults.cardColors(containerColor = Color(0xFF1E293B)),
+            colors = CardDefaults.cardColors(containerColor = Color.Transparent),
             elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(20.dp),
+                    .padding(30.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 // Account Type selection
                 Text(
-                    text = "I want to register as:",
+                    text = "REGISTER AS :",
                     fontSize = 14.sp,
-                    color = Color(0xFF94A3B8),
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Green,
                     modifier = Modifier.align(Alignment.Start)
                 )
 
@@ -146,7 +146,7 @@ fun RegisterScreen(navController: NavHostController) {
                         onClick = { role = "Buyer" },
                         label = { Text("Car Buyer") },
                         colors = FilterChipDefaults.filterChipColors(
-                            selectedContainerColor = Color(0xFF2563EB),
+                            selectedContainerColor = Color.Black,
                             selectedLabelColor = Color.White
                         )
                     )
@@ -156,7 +156,7 @@ fun RegisterScreen(navController: NavHostController) {
                         onClick = { role = "Seller" },
                         label = { Text("Car Seller") },
                         colors = FilterChipDefaults.filterChipColors(
-                            selectedContainerColor = Color(0xFF2563EB),
+                            selectedContainerColor = Color.Black,
                             selectedLabelColor = Color.White
                         )
                     )
@@ -178,6 +178,15 @@ fun RegisterScreen(navController: NavHostController) {
                         )
                     },
                     shape = RoundedCornerShape(12.dp),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedTextColor = Color.Black,
+                        unfocusedTextColor = Color.Black,
+                        focusedLabelColor = Color(0xFF1E293B),
+                        unfocusedLabelColor = Color(0xFF64748B),
+                        cursorColor = Color.Black,
+                        focusedBorderColor = Color.Black,
+                        unfocusedBorderColor = Color(0xFF94A3B8)
+                    ),
                     modifier = Modifier.fillMaxWidth()
                 )
 
@@ -198,6 +207,15 @@ fun RegisterScreen(navController: NavHostController) {
                         )
                     },
                     shape = RoundedCornerShape(12.dp),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedTextColor = Color.Black,
+                        unfocusedTextColor = Color.Black,
+                        focusedLabelColor = Color(0xFF1E293B),
+                        unfocusedLabelColor = Color(0xFF64748B),
+                        cursorColor = Color.Black,
+                        focusedBorderColor = Color.Black,
+                        unfocusedBorderColor = Color(0xFF94A3B8)
+                    ),
                     modifier = Modifier.fillMaxWidth()
                 )
 
@@ -228,6 +246,15 @@ fun RegisterScreen(navController: NavHostController) {
                         }
                     },
                     shape = RoundedCornerShape(12.dp),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedTextColor = Color.Black,
+                        unfocusedTextColor = Color.Black,
+                        focusedLabelColor = Color(0xFF1E293B),
+                        unfocusedLabelColor = Color(0xFF64748B),
+                        cursorColor = Color.Black,
+                        focusedBorderColor = Color.Black,
+                        unfocusedBorderColor = Color(0xFF94A3B8)
+                    ),
                     modifier = Modifier.fillMaxWidth()
                 )
 
@@ -249,6 +276,15 @@ fun RegisterScreen(navController: NavHostController) {
                         )
                     },
                     shape = RoundedCornerShape(12.dp),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedTextColor = Color.Black,
+                        unfocusedTextColor = Color.Black,
+                        focusedLabelColor = Color(0xFF1E293B),
+                        unfocusedLabelColor = Color(0xFF64748B),
+                        cursorColor = Color.Black,
+                        focusedBorderColor = Color.Black,
+                        unfocusedBorderColor = Color(0xFF94A3B8)
+                    ),
                     modifier = Modifier.fillMaxWidth()
                 )
 
@@ -260,7 +296,7 @@ fun RegisterScreen(navController: NavHostController) {
                         authViewModel.signup(fullname, email, password, confirmPassword, role)
                     },
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF2563EB),
+                        containerColor = Color.Magenta,
                         contentColor = Color.White
                     ),
                     shape = RoundedCornerShape(12.dp),
@@ -269,7 +305,7 @@ fun RegisterScreen(navController: NavHostController) {
                         .height(50.dp)
                 ) {
                     Text(
-                        text = "REGISTER NOW",
+                        text = "REGISTER",
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Bold
                     )
@@ -280,7 +316,7 @@ fun RegisterScreen(navController: NavHostController) {
                 TextButton(onClick = { navController.navigate(ROUTE_LOGIN) }) {
                     Text(
                         text = "Already have an account? Login here",
-                        color = Color(0xFF60A5FA),
+                        color = Color.Blue,
                         fontSize = 14.sp
                     )
                 }

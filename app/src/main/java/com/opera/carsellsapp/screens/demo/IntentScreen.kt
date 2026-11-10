@@ -36,12 +36,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.opera.carsellsapp.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -49,11 +51,12 @@ fun IntentScreen(navController: NavHostController = rememberNavController()) {
     val context = LocalContext.current
 
     Scaffold(
+        containerColor = colorResource(id = R.color.chis),
         topBar = {
             CenterAlignedTopAppBar(
                 title = { Text("CARSELL INTENTS", fontWeight = FontWeight.Bold) },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFF0F172A),
+                    containerColor = Color.Black,
                     titleContentColor = Color.White
                 )
             )
@@ -62,7 +65,7 @@ fun IntentScreen(navController: NavHostController = rememberNavController()) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color(0xFF0F172A))
+                .background(colorResource(id = R.color.chis))
                 .padding(innerPadding)
                 .verticalScroll(rememberScrollState())
                 .padding(20.dp),

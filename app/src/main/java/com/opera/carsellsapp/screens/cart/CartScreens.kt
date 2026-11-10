@@ -53,6 +53,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
+import com.opera.carsellsapp.R
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -88,6 +90,7 @@ fun CartScreen(navController: NavHostController) {
     }
 
     Scaffold(
+        containerColor = colorResource(id = R.color.chis),
         topBar = {
             TopAppBar(
                 title = { Text("My Cart", fontWeight = FontWeight.Bold) },
@@ -101,7 +104,7 @@ fun CartScreen(navController: NavHostController) {
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFF4CAF50),
+                    containerColor = Color.Black,
                     titleContentColor = Color.White
                 )
             )
